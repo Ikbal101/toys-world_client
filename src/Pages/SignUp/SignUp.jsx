@@ -1,35 +1,16 @@
-import { Link } from 'react-router-dom';
-import img from '../../assets/images/login/login.svg'
-import { useContext } from 'react';
-import { AuthContext } from '../../providers/AuthProvider';
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
 
-    const { createUser } = useContext(AuthContext);
-
     const handleSignUp = event => {
         event.preventDefault();
-        const form = event.target;
-        const name = form.name.value;
-        const email = form.email.value;
-        const password = form.password.value;
-        console.log(name, email, password)
-
-
-        createUser(email, password)
-            .then(result => {
-                const user = result.user;
-                console.log('created user', user)
-            })
-            .catch(error => console.log(error))
-
     }
 
     return (
-        <div className="hero min-h-screen bg-base-200">
+      <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row">
                 <div className="w-1/2 mr-12">
-                    <img src={img} alt="" />
+                    <img src="https://img.freepik.com/free-icon/shield_318-581226.jpg?t=st=1684512314~exp=1684512914~hmac=5a7b8c40f3bcfa375c8d92c5e8d596bdc539667c9f4adcbfc5f791ed02aae156" alt="" />
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <div className="card-body">
