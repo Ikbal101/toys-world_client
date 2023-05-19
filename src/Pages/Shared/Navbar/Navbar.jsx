@@ -6,6 +6,7 @@ const Navbar = () => {
     <li><Link to="/" className="font-medium">Home</Link> </li>
     <li> <Link to="/all" className="font-medium">All Toys</Link> </li>
     <li> <Link to="/blog" className="font-medium">Blog</Link> </li>
+    <li> <Link to="/login" className="font-medium">LogIn</Link> </li>
     {/* { user?.email ?  <>
         <li><Link to="/bookings">My Bookings</Link></li>
         <li><button onClick={handleLogOut}>Log out</button></li>

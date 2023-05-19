@@ -1,65 +1,80 @@
-import {
-    Tabs,
-    TabsHeader,
-    TabsBody,
-    Tab,
-    TabPanel,
-  } from "@material-tailwind/react";
-   
-  export default function Example() {
-    const data = [
-      {
-        label: "HTML",
-        value: "html",
-        desc: `It really matters and then like it really doesn't matter.
-        What matters is the people who are sparked by it. And the people 
-        who are like offended by it, it doesn't matter.`,
-      },
-      {
-        label: "React",
-        value: "react",
-        desc: `Because it's about motivating the doers. Because I'm here
-        to follow my dreams and inspire other people to follow their dreams, too.`,
-      },
-      {
-        label: "Vue",
-        value: "vue",
-        desc: `We're not always in the position that we want to be at.
-        We're constantly growing. We're constantly making mistakes. We're
-        constantly trying to express ourselves and actualize our dreams.`,
-      },
-      {
-        label: "Angular",
-        value: "angular",
-        desc: `Because it's about motivating the doers. Because I'm here
-        to follow my dreams and inspire other people to follow their dreams, too.`,
-      },
-      {
-        label: "Svelte",
-        value: "svelte",
-        desc: `We're not always in the position that we want to be at.
-        We're constantly growing. We're constantly making mistakes. We're
-        constantly trying to express ourselves and actualize our dreams.`,
-      },
-    ];
-   
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
+
+// eslint-disable-next-line react/prop-types
+function Card({ image, name, price, rating }) {
   return (
-   
-  <Tabs value="html">
-    <TabsHeader>
-      {data.map(({ label, value }) => (
-        <Tab key={value} value={value}>
-          {label}
-        </Tab>
-      ))}
-    </TabsHeader>
-    <TabsBody>
-      {data.map(({ value, desc }) => (
-        <TabPanel key={value} value={value}>
-          {desc}
-        </TabPanel>
-      ))}
-    </TabsBody>
-  </Tabs>
-  ); }
-   
+    <div className="card">
+      <img src={image} alt={name} />
+      <h3>{name}</h3>
+      <p>Price: {price}</p>
+      <p>Rating: {rating}</p>
+      <button>View Details</button>
+    </div>
+  );
+}
+
+function TabSection() {
+  return (
+    <Tabs>
+      <TabList>
+        <Tab>Tab 1</Tab>
+        <Tab>Tab 2</Tab>
+        <Tab>Tab 3</Tab>
+      </TabList>
+
+      <TabPanel>
+        <div className="card-container">
+          <Card
+            image="/path/to/image1.jpg"
+            name="Product 1"
+            price="$19.99"
+            rating="4.5"
+          />
+          <Card
+            image="/path/to/image2.jpg"
+            name="Product 2"
+            price="$24.99"
+            rating="4.2"
+          />
+        </div>
+      </TabPanel>
+
+      <TabPanel>
+        <div className="card-container">
+          <Card
+            image="/path/to/image3.jpg"
+            name="Product 3"
+            price="$14.99"
+            rating="4.7"
+          />
+          <Card
+            image="/path/to/image4.jpg"
+            name="Product 4"
+            price="$29.99"
+            rating="4.9"
+          />
+        </div>
+      </TabPanel>
+
+      <TabPanel>
+        <div className="card-container">
+          <Card
+            image="/path/to/image5.jpg"
+            name="Product 5"
+            price="$22.99"
+            rating="4.4"
+          />
+          <Card
+            image="/path/to/image6.jpg"
+            name="Product 6"
+            price="$17.99"
+            rating="4.8"
+          />
+        </div>
+      </TabPanel>
+    </Tabs>
+  );
+}
+
+export default TabSection;
