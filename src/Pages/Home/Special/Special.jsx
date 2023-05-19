@@ -29,7 +29,7 @@ const Special = () => {
               channels mystical energies to manipulate reality, time, and
               dimensions, employing powerful spells and artifacts like the Cloak
               of Levitation and the Eye of Agamotto, making him a master of the
-              mystic arts and a defender against supernatural threats.{" "}
+              mystic arts and a defender against supernatural threat.{" "}
             </p>
             <button className="btn btn-warning" ><a href="https://en.wikipedia.org/wiki/Marvel_Legends" target="blank">Get More Info</a></button>
           </div>
