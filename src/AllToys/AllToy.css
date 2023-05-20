@@ -1,0 +1,45 @@
+.search{
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border: 2px solid ;
+    border-radius: 10px;
+    padding: 7px;
+}
+
+.toys-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .toys-table th,
+  .toys-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .toys-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .toys-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .toys-table tbody tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .toys-table button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  
+  .toys-table button:hover {
+    background-color: #45a049;
+  }
+  
