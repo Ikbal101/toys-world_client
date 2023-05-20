@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import "./Details.css"
+import { Link, useParams } from "react-router-dom";
 
 const Details = () => {
   const { id } = useParams();
@@ -28,20 +27,26 @@ const Details = () => {
       ) : (
         <div>
           {toyData && (
-            <div className="card">
-              <img
-                src={toyData.photoUrl}
-                alt={toyData.name}
-                className="card-image"
-              />
-              <div className="card-details">
-                <h3 className="card-title">{toyData.name}</h3>
-                <p className="card-text">Seller: {toyData.sellerName}</p>
-                <p className="card-text">Seller Email: {toyData.sellerEmail}</p>
-                <p className="card-text">Price: ${toyData.price}</p>
-                <p className="card-text">Rating: {toyData.rating}</p>
-                <p className="card-text">Quantity: {toyData.quantity}</p>
-                <p className="card-text">Description: {toyData.description}</p>
+            <div>
+              <div className="card card-side bg-base-100 shadow-xl">
+                <figure>
+                  <img src={toyData.photoUrl} alt={toyData.name}  className="h-96" />
+                </figure>
+                <div className="card-body">
+                  <h2 className="card-title">{toyData.name}</h2>
+                  <p>Seller: {toyData.sellerName}</p>
+                  <p>Seller Email: {toyData.sellerEmail}</p>
+                  <p>Price: ${toyData.price}</p>
+                  <p>Rating: {toyData.rating}</p>
+                  <p>Quantity: {toyData.quantity}</p>
+                  <p>Description: {toyData.description}</p>
+                  <div className="card-actions justify-end d-flex items-center">
+                    <span><b>Wants to add more toys?</b></span>
+                    <Link to="/add">
+                    <button className="btn btn-primary">Add A toy</button>
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           )}

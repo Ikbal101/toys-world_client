@@ -5,6 +5,8 @@ const Navbar = () => {
     const navItems = <>
     <li><Link to="/" className="font-medium">Home</Link> </li>
     <li> <Link to="/all" className="font-medium">All Toys</Link> </li>
+    <li> <Link to='/add' className="font-medium">Add A Toy</Link> </li>
+
     <li> <Link to="/blog" className="font-medium">Blog</Link> </li>
     <li> <Link to="/login" className="font-medium">LogIn</Link> </li>
     {/* { user?.email ?  <>
