@@ -2,7 +2,7 @@ import pic1 from "../../../assets/carousel/thor.webp";
 import pic2 from "../../../assets/carousel/doctor.jpg";
 const Special = () => {
   return (
-    <div>
+    <div className="mb-20">
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row">
           <div className="lg:w-1/2 relative">
