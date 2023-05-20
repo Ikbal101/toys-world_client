@@ -11,6 +11,7 @@ const Home = () => {
             <Carousel></Carousel>
            <Special></Special>
             <FillExample></FillExample>
+            
         </div>
     );
 };

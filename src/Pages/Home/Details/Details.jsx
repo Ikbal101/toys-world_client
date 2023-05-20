@@ -1,34 +1,52 @@
-import  { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import "./Details.css"
 
 const Details = () => {
   const { id } = useParams();
-  const [toyDetails, setToyDetails] = useState(null);
+  console.log(id);
+  const [toyData, setToyData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch the toy details based on the id from the server
     fetch(`http://localhost:5000/toys/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        setToyDetails(data);
+        setToyData(data);
+        setLoading(false);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
   }, [id]);
-
-  if (!toyDetails) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div>
-      <img src={toyDetails.photoUrl} alt={toyDetails.name} />
-      <h3>{toyDetails.name}</h3>
-      <p>Seller: {toyDetails.sellerName}</p>
-      <p>Seller Email: {toyDetails.sellerEmail}</p>
-      <p>Price: ${toyDetails.price}</p>
-      <p>Rating: {toyDetails.rating}</p>
-      <p>Available Quantity: {toyDetails.quantity}</p>
-      <p>Description: {toyDetails.description}</p>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <div>
+          {toyData && (
+            <div className="card">
+              <img
+                src={toyData.photoUrl}
+                alt={toyData.name}
+                className="card-image"
+              />
+              <div className="card-details">
+                <h3 className="card-title">{toyData.name}</h3>
+                <p className="card-text">Seller: {toyData.sellerName}</p>
+                <p className="card-text">Seller Email: {toyData.sellerEmail}</p>
+                <p className="card-text">Price: ${toyData.price}</p>
+                <p className="card-text">Rating: {toyData.rating}</p>
+                <p className="card-text">Quantity: {toyData.quantity}</p>
+                <p className="card-text">Description: {toyData.description}</p>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { Tabs, TabsHeader, TabsBody, Tab, TabPanel } from "@material-tailwind/react";
-import "./FillExample.css"
+import { Link } from "react-router-dom";
+import "./FillExample.css";
 
-export default function Example() {
+const Example = () => {
   const [toysData, setToysData] = useState([]);
 
   useEffect(() => {
@@ -22,14 +23,11 @@ export default function Example() {
   const getCategoryFromId = (id) => {
     if (id >= 1 && id <= 3) {
       return "Avengers";
-    } 
-    else if (id >= 4 && id <= 6) {
+    } else if (id >= 4 && id <= 6) {
       return "Star Wars";
-    } 
-    else if (id >= 5 && id <= 8) { // Update the condition for "Transformers"
+    } else if (id >= 7 && id <= 10) {
       return "Transformers";
-    } 
-    else {
+    } else {
       return "Other";
     }
   };
@@ -47,24 +45,28 @@ export default function Example() {
       </TabsHeader>
       <TabsBody>
         {categories.map((category) => (
-         <TabPanel key={category} value={category.toLowerCase()}>
-         <div className="card-container">
-           {toysData
-             .filter((toy) => toy.category.toLowerCase() === category.toLowerCase())
-             .slice(0, 2) // Display only the first 2 cards for each category
-             .map((toy) => (
-               <div key={toy._id} className="cards">
-                 <img src={toy.photoUrl} alt={toy.name} />
-                 <h3>{toy.name}</h3>
-                 <p>Price: ${toy.price}</p>
-                 <p>Rating: {toy.rating}</p>
-                 <button className="bg-orange-600 btn">View Details</button>
-               </div>
-             ))}
-         </div>
-       </TabPanel>
+          <TabPanel key={category} value={category.toLowerCase()}>
+            <div className="card-container">
+              {toysData
+                .filter((toy) => toy.category.toLowerCase() === category.toLowerCase())
+                .slice(0, 2) // Display only the first 2 cards for each category
+                .map((toy) => (
+                  <div key={toy._id} className="cards">
+                    <img src={toy.photoUrl} alt={toy.name} />
+                    <h3>{toy.name}</h3>
+                    <p>Price: ${toy.price}</p>
+                    <p>Rating: {toy.rating}</p>
+                    <Link to={`/details/${toy._id}`} className="bg-orange-600 btn">
+                      View Details
+                    </Link>
+                  </div>
+                ))}
+            </div>
+          </TabPanel>
         ))}
       </TabsBody>
     </Tabs>
   );
-}
+};
+
+export default Example;
