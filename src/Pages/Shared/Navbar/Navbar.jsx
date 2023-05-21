@@ -1,22 +1,35 @@
 import { Link } from "react-router-dom";
 import logo from "../../../assets/nav.png"
-
+import { AuthContext } from "../../../Providers/AuthProviders";
+import { useContext } from "react";
+import pic from "../../../assets/carousel/doctor.jpg"
 const Navbar = () => {
+    const {user, logOut} = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+        .then(() =>{
+           
+        })
+        
+        .catch( error => console.log(error))
+    }
     const navItems = <>
     <li><Link to="/" className="font-medium">Home</Link> </li>
     <li> <Link to="/all" className="font-medium">All Toys</Link> </li>
-    <li> <Link to='/add' className="font-medium">Add A Toy</Link> </li>
-    <li> <Link to='/myToy' className="font-medium">My Toys</Link> </li>
+    {/* <li> <Link to='/add' className="font-medium">Add A Toy</Link> </li>
+    <li> <Link to='/myToy' className="font-medium">My Toys</Link> </li> */}
 
-    <li> <Link to="/blog" className="font-medium">Blog</Link> </li>
-    <li> <Link to="/login" className="font-medium">LogIn</Link> </li>
-    {/* { user?.email ?  <>
-        <li><Link to="/bookings">My Bookings</Link></li>
+    {/* <li> <Link to="/login" className="font-medium">LogIn</Link> </li> */}
+        <li> <Link to="/blog" className="font-medium">Blog</Link> </li>
+    { user?.email ?  <>
+        <li> <Link to='/add' className="font-medium">Add A Toy</Link> </li>
+        <li> <Link to='/myToy' className="font-medium">My Toys</Link> </li>
         <li><button onClick={handleLogOut}>Log out</button></li>
         <img src={pic} className="h-10 w-10 rounded-full" alt="" />
-    </> 
-    : <li> <Link to="/login">Login</Link> </li>
-   } */}
+        </> 
+        : <li> <Link to="/login">Login</Link> </li>
+    }
 
 </>
 return (
