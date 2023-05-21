@@ -1,5 +1,6 @@
-import  { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Providers/AuthProviders";
+import "./MyToys.css";
 
 const MyToys = () => {
   const { user } = useContext(AuthContext);
@@ -12,6 +13,16 @@ const MyToys = () => {
         setToys(data);
       });
   }, [user]);
+
+  const handleUpdateToy = (id) => {
+    // Handle update logic for the toy with the given id
+    console.log("Update toy with id:", id);
+  };
+
+  const handleDeleteToy = (id) => {
+    // Handle delete logic for the toy with the given id
+    console.log("Delete toy with id:", id);
+  };
 
   return (
     <div>
@@ -27,6 +38,7 @@ const MyToys = () => {
             <th>Rating</th>
             <th>Available Quantity</th>
             <th>Detail Description</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -41,6 +53,21 @@ const MyToys = () => {
               <td>{toy.rating}</td>
               <td>{toy.quantity}</td>
               <td>{toy.description}</td>
+              <td>
+                <button
+                  className="action-button mb-3"
+                  onClick={() => handleUpdateToy(toy.id)}
+                >
+                  Update
+                </button>
+                <br />
+                <button
+                  className="action-button"
+                  onClick={() => handleDeleteToy(toy.id)}
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
