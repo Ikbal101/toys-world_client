@@ -1,10 +1,16 @@
+// MyToys.jsx
+import React from 'react';
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Providers/AuthProviders";
 import "./MyToys.css";
+import Button from "react-bootstrap/Button";
+// import Modal from "react-bootstrap/Modal";
+import UpdateToyModal from '../UpdateToyModal/UpdateToyModal';
 
 const MyToys = () => {
   const { user } = useContext(AuthContext);
   const [toys, setToys] = useState([]);
+  const [modalShow, setModalShow] = React.useState(false);
 
   useEffect(() => {
     fetch(`http://localhost:5000/myToy/${user?.email}`)
@@ -14,22 +20,15 @@ const MyToys = () => {
       });
   }, [user]);
 
-  const handleUpdateToy = (id) => {
-    // Handle update logic for the toy with the given id
-    console.log("Update toy with id:", id);
-  };
 
-  const handleDeleteToy = (id) => {
-    // Handle delete logic for the toy with the given id
-    console.log("Delete toy with id:", id);
-  };
+  
 
   return (
     <div>
       <table>
         <thead>
           <tr>
-            <th>Picture URL</th>
+            <th>Image</th>
             <th>Name</th>
             <th>Seller Name</th>
             <th>Seller Email</th>
@@ -42,9 +41,13 @@ const MyToys = () => {
           </tr>
         </thead>
         <tbody>
-          {toys.map((toy) => (
-            <tr key={toy.id}>
-              <td>{toy.pictureUrl}</td>
+  {toys.map((toy, index) => (
+    <tr key={toy.id || index}>
+
+        <td>{ index + 1}</td>
+              <td>
+                <img src={toy.pictureUrl} alt={toy.name} className="toy-image" />
+              </td>
               <td>{toy.name}</td>
               <td>{toy.sellerName}</td>
               <td>{toy.sellerEmail}</td>
@@ -54,16 +57,23 @@ const MyToys = () => {
               <td>{toy.quantity}</td>
               <td>{toy.description}</td>
               <td>
-                <button
-                  className="action-button mb-3"
-                  onClick={() => handleUpdateToy(toy.id)}
-                >
-                  Update
-                </button>
+              <>
+      <Button variant="primary" onClick={() => setModalShow(true)}>
+        Update
+      </Button>
+
+      <UpdateToyModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        toy={toy}
+        // handleToyUpdate ={handleToyUpdate}
+        
+      />
+    </>
+
                 <br />
                 <button
                   className="action-button"
-                  onClick={() => handleDeleteToy(toy.id)}
                 >
                   Delete
                 </button>
@@ -72,6 +82,8 @@ const MyToys = () => {
           ))}
         </tbody>
       </table>
+
+    
     </div>
   );
 };
