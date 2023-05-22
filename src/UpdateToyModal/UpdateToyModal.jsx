@@ -1,99 +1,128 @@
-// import React from 'react';
+import { useForm } from "react-hook-form";
 
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import { useForm } from 'react-hook-form';
+const UpdateToyModal = ({ toy, isOpen, onClose }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-const UpdateToyModal = (props) => {
-
-    const {
-        register,
-        handleSubmit,
-        // watch,
-        formState: { errors },
-      } = useForm();
-    
-      const { handleToyUpdate } = props;
-    return (
-        <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
+  const handleToyUpdate = (data) => {
+    // Send a PUT request to update the toy on the server
+    fetch(`http://localhost:5000/toys/${toy._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((updatedToy) => {
+        console.log("Updated toy data:", updatedToy);
+        onClose(); // Close the modal after updating
+      })
+      .catch((error) => {
+        console.error("Error updating toy:", error);
+      });
+  };
+  return (
+    <div
+      className={`fixed inset-0 flex items-center justify-center ${
+        isOpen ? "" : "hidden"
+      }`}
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Update Toy
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-      <form onSubmit={handleSubmit(handleToyUpdate)}>
-       
-
-          <div className="form-group">
-            <label htmlFor="price">Price:</label>
+      <div className="fixed inset-0 bg-black opacity-50"></div>
+      <div className="bg-white rounded-lg p-8 z-10">
+        <h2 className="text-2xl font-bold mb-4">Update Toy</h2>
+        <form onSubmit={handleSubmit(handleToyUpdate)}>
+          <div className="mb-4">
+            <label htmlFor="price" className="block font-medium">
+              Price:
+            </label>
             <input
-              className="form-control border rounded bg-orange-50"
               {...register("price", { required: true })}
-              id="price"
               type="number"
-              defaultValue={props?.toy?.price}
+              id="price"
+              defaultValue={toy?.price}
+              className="border rounded bg-gray-100 p-2 w-full"
             />
             {errors.price && (
-              <span className="error">This field is required</span>
+              <span className="text-red-500 text-sm">
+                This field is required
+              </span>
             )}
           </div>
 
-          <div className="form-group">
-            <label htmlFor="rating">Rating:</label>
+          <div className="mb-4">
+            <label htmlFor="rating" className="block font-medium">
+              Rating:
+            </label>
             <input
-              className="form-control border rounded bg-orange-50"
               {...register("rating", { required: true })}
-              id="rating"
               type="number"
-              defaultValue={props?.toy?.rating}
+              id="rating"
+              defaultValue={toy?.rating}
+              className="border rounded bg-gray-100 p-2 w-full"
             />
             {errors.rating && (
-              <span className="error">This field is required</span>
+              <span className="text-red-500 text-sm">
+                This field is required
+              </span>
             )}
           </div>
 
-          <div className="form-group">
-            <label htmlFor="quantity">Available Quantity:</label>
+          <div className="mb-4">
+            <label htmlFor="quantity" className="block font-medium">
+              Available Quantity:
+            </label>
             <input
-              className="form-control border rounded bg-orange-50"
               {...register("quantity", { required: true })}
-              id="quantity"
               type="number"
-              defaultValue={props?.toy?.quantity}
+              id="quantity"
+              defaultValue={toy?.quantity}
+              className="border rounded bg-gray-100 p-2 w-full"
             />
             {errors.quantity && (
-              <span className="error">This field is required</span>
+              <span className="text-red-500 text-sm">
+                This field is required
+              </span>
             )}
           </div>
 
-          <div className="form-group">
-            <label htmlFor="description">Detail Description:</label>
+          <div className="mb-4">
+            <label htmlFor="description" className="block font-medium">
+              Detail Description:
+            </label>
             <textarea
-              className="form-control border rounded bg-orange-50"
               {...register("description", { required: true })}
               id="description"
+              className="border rounded bg-gray-100 p-2 w-full"
             ></textarea>
             {errors.description && (
-              <span className="error">This field is required</span>
+              <span className="text-red-500 text-sm">
+                This field is required
+              </span>
             )}
           </div>
 
-          <button className="btn btn-primary" type="submit">
-            Update Toy
-          </button>
+          <div className="flex justify-end">
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Update Toy
+            </button>
+            <button
+              onClick={onClose}
+              className="ml-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+            >
+              Close
+            </button>
+          </div>
         </form>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
-    </Modal>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default UpdateToyModal;

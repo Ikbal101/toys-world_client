@@ -1,5 +1,5 @@
-import  { useEffect, useState } from 'react';
-import './AllToy.css'
+import { useEffect, useState } from 'react';
+import './AllToy.css';
 import { Link } from 'react-router-dom';
 
 const ToysTable = () => {
@@ -24,6 +24,14 @@ const ToysTable = () => {
 
   const handleShowAll = () => {
     setShowAll(true);
+    fetch('http://localhost:5000/toys')
+      .then(response => response.json())
+      .then(toysData => {
+        setToys(toysData);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   };
 
   const filteredToys = showAll
@@ -81,11 +89,13 @@ const ToysTable = () => {
         </tbody>
       </table>
 
-      <div className='show-all-container'>
-        <button onClick={handleShowAll} className='show-all-btn'>
-          Show All
-        </button>
-      </div>
+      {!showAll && (
+        <div className='show-all-container'>
+          <button onClick={handleShowAll} className='show-all-btn'>
+            Show All
+          </button>
+        </div>
+      )}
     </div>
   );
 };

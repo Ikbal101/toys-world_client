@@ -1,31 +1,60 @@
-// MyToys.jsx
-import React from 'react';
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Providers/AuthProviders";
+import UpdateToyModal from "../UpdateToyModal/UpdateToyModal";
 import "./MyToys.css";
-import Button from "react-bootstrap/Button";
-// import Modal from "react-bootstrap/Modal";
-import UpdateToyModal from '../UpdateToyModal/UpdateToyModal';
 
 const MyToys = () => {
   const { user } = useContext(AuthContext);
   const [toys, setToys] = useState([]);
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedToy, setSelectedToy] = useState(null);
 
   useEffect(() => {
+    fetchToys();
+  }, [user]);
+
+  const fetchToys = () => {
     fetch(`http://localhost:5000/myToy/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setToys(data);
+      })
+      .catch((error) => {
+        console.log("Error fetching toys:", error);
       });
-  }, [user]);
+  };
 
+  const handleUpdateToy = (toy) => {
+    setSelectedToy(toy);
+    setModalOpen(true);
+  };
 
-  
+  const handleDeleteToy = (id) => {
+    fetch(`http://localhost:5000/toys/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // Update the toys list after deleting the toy
+        if (data.deletedCount === 1) {
+          const updatedToys = toys.filter((toy) => toy._id !== id);
+          setToys(updatedToys);
+        }
+      })
+      .catch((error) => {
+        console.log("Error deleting toy:", error);
+      });
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+    fetchToys(); // Fetch toys data again after closing the modal
+  };
 
   return (
     <div>
-      <table>
+      <table className="w-full">
+
         <thead>
           <tr>
             <th>Image</th>
@@ -41,10 +70,9 @@ const MyToys = () => {
           </tr>
         </thead>
         <tbody>
-  {toys.map((toy, index) => (
-    <tr key={toy.id || index}>
-
-        <td>{ index + 1}</td>
+          {toys.map((toy, index) => (
+            <tr key={toy._id || index}>
+              <td>{index + 1}</td>
               <td>
                 <img src={toy.pictureUrl} alt={toy.name} className="toy-image" />
               </td>
@@ -57,23 +85,16 @@ const MyToys = () => {
               <td>{toy.quantity}</td>
               <td>{toy.description}</td>
               <td>
-              <>
-      <Button variant="primary" onClick={() => setModalShow(true)}>
-        Update
-      </Button>
-
-      <UpdateToyModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-        toy={toy}
-        // handleToyUpdate ={handleToyUpdate}
-        
-      />
-    </>
-
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  onClick={() => handleUpdateToy(toy)}
+                >
+                  Update
+                </button>
                 <br />
                 <button
                   className="action-button"
+                  onClick={() => handleDeleteToy(toy._id)}
                 >
                   Delete
                 </button>
@@ -83,7 +104,13 @@ const MyToys = () => {
         </tbody>
       </table>
 
-    
+       {selectedToy && (
+        <UpdateToyModal
+          toy={selectedToy}
+          isOpen={modalOpen}
+          onClose={handleCloseModal}
+        />
+      )}
     </div>
   );
 };
