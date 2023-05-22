@@ -2,7 +2,7 @@ import  { useEffect, useState } from "react";
 import { Tabs, TabsHeader, TabsBody, Tab, TabPanel } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import "./FillExample.css";
-import PrivateRoute from "../../../Routes/PrivateRoutes";
+// import PrivateRoute from "../../../Routes/PrivateRoutes";
 
 const Example = () => {
   const [toysData, setToysData] = useState([]);
@@ -57,11 +57,11 @@ const Example = () => {
                     <h3>{toy.name}</h3>
                     <p>Price: ${toy.price}</p>
                     <p>Rating: {toy.rating}</p>
-                    <PrivateRoute>
+                    
                       <Link to={`/details/${toy._id}`} >
                        <button className="bg-orange-600 btn"> View Details</button>
                       </Link>
-                    </PrivateRoute>
+                    
                   </div>
                 ))}
             </div>
