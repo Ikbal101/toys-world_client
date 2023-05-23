@@ -26,7 +26,7 @@ const Navbar = () => {
         <li> <Link to='/add' className="font-medium">Add A Toy</Link> </li>
         <li> <Link to='/myToy' className="font-medium">My Toys</Link> </li>
         <li><button onClick={handleLogOut}>Log out</button></li>
-        <img src={pic} className="h-10 w-10 rounded-full" alt="Doctor Strange" />
+        <img src={pic} className="h-10 w-10 rounded-full" alt="Doctor Strange" title="Doctor Strange" />
         </> 
         : <li> <Link to="/login">Login</Link> </li>
     }
