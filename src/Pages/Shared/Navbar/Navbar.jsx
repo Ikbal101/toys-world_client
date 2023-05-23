@@ -44,7 +44,7 @@ return (
                 </ul>
             </div>
             <Link to="/" className="btn btn-ghost normal-case text-xl">
-                <img src={logo} alt="" className="h-13 w-16 rounded-xl" />
+                <img src={logo} alt="" title="Doctor Strange" className="h-13 w-16 rounded-xl" />
             </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
