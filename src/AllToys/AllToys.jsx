@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './AllToy.css';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Providers/AuthProviders';
 
 const ToysTable = () => {
   const [toys, setToys] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [showAll, setShowAll] = useState(false);
+  const {user}=useContext(AuthContext)
 
   useEffect(() => {
     fetch('http://localhost:5000/toys')
@@ -40,6 +42,16 @@ const ToysTable = () => {
         toy.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
 
+      const handleViewDetails = (toy) => {
+        if (user) {
+          // User is logged in, allow viewing details
+          // Add your logic here to handle the view details action
+          console.log("View Details clicked for toy:", toy);
+        } else {
+          // User is not logged in, show toast message or redirect to login page
+          console.log("You need to log in first to view details");
+        }
+      };
   return (
     <div>
       <div className='text-center'>
@@ -74,15 +86,18 @@ const ToysTable = () => {
             <tr key={toy._id}>
               <td>{toy.sellerName || ''}</td>
               <td>{toy.name}</td>
-              <td>{toy.category}</td>
+              <td>{toy.category || toy.subCategory}</td>
               <td>{toy.price}</td>
               <td>{toy.quantity}</td>
               <td>
-                <Link to={`/details/${toy._id}`}>
-                  <button onClick={() => console.log('View Details clicked for toy:', toy)}>
-                    View Details
-                  </button>
-                </Link>
+                {/* View Details button */}
+                {user ? (
+                  <Link to={`/details/${toy._id}`}>
+                    <button onClick={() => handleViewDetails(toy)}>View Details</button>
+                  </Link>
+                ) : (
+                  <p className="font-bold text-red-800">You have to log in first to view details</p>
+                )}
               </td>
             </tr>
           ))}

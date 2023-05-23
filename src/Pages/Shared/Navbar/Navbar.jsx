@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../../../assets/nav.png"
+import logo from "../../../assets/banner/nav.png"
 import { AuthContext } from "../../../Providers/AuthProviders";
 import { useContext } from "react";
 import pic from "../../../assets/carousel/doctor.jpg"
@@ -26,7 +26,7 @@ const Navbar = () => {
         <li> <Link to='/add' className="font-medium">Add A Toy</Link> </li>
         <li> <Link to='/myToy' className="font-medium">My Toys</Link> </li>
         <li><button onClick={handleLogOut}>Log out</button></li>
-        <img src={pic} className="h-10 w-10 rounded-full" alt="" />
+        <img src={pic} className="h-10 w-10 rounded-full" alt="Doctor Strange" />
         </> 
         : <li> <Link to="/login">Login</Link> </li>
     }

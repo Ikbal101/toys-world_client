@@ -42,4 +42,18 @@
   .toys-table button:hover {
     background-color: #45a049;
   }
+  .show-all-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
   
+  .show-all-btn {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }

@@ -12,6 +12,7 @@ const Details = () => {
       .then((response) => response.json())
       .then((data) => {
         setToyData(data);
+        console.log(data);
         setLoading(false);
       })
       .catch((error) => {
@@ -30,7 +31,7 @@ const Details = () => {
             <div>
               <div className="card card-side bg-base-100 shadow-xl">
                 <figure>
-                  <img src={toyData.photoUrl} alt={toyData.name}  className="h-96" />
+                  <img src={toyData?.photoUrl || toyData?.pictureUrl} alt={toyData.name}  className="h-96" />
                 </figure>
                 <div className="card-body">
                   <h2 className="card-title">{toyData.name}</h2>

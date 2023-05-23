@@ -16,7 +16,7 @@ const AddToy = () => {
 
   const onSubmit = (data) => {
     // Send the data to the server
-    data.categories = selectedToys;
+    data.subCategory = selectedToys.value;
     fetch("http://localhost:5000/adding", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -41,14 +41,14 @@ const AddToy = () => {
         <h2 className="font-bold text-2xl text-orange-800">Add Toy</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">
-            <label htmlFor="pictureUrl">Picture URL of the toy:</label>
+            <label htmlFor="photoUrl">Picture URL of the toy:</label>
             <input
               className="form-control border rounded bg-orange-50"
-              {...register("pictureUrl", { required: true })}
-              id="pictureUrl"
+              {...register("photoUrl", { required: true })}
+              id="photoUrl"
               type="text"
             />
-            {errors.pictureUrl && (
+            {errors.photoUrl && (
               <span className="error">This field is required</span>
             )}
           </div>

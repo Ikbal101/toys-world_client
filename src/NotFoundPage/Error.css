@@ -1,0 +1,15 @@
+.back-btn{
+    background:rgb(248, 203, 90);
+    color: black;
+    padding: 7px;
+    border-radius: 7px;
+    margin-top: 10px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-btn:hover{
+    background: orange;
+}

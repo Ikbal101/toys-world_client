@@ -1,11 +1,12 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Tabs, TabsHeader, TabsBody, Tab, TabPanel } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import "./FillExample.css";
-// import PrivateRoute from "../../../Routes/PrivateRoutes";
+import { AuthContext } from "../../../Providers/AuthProviders";
 
 const Example = () => {
   const [toysData, setToysData] = useState([]);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     // Fetch the data from the server
@@ -57,11 +58,13 @@ const Example = () => {
                     <h3>{toy.name}</h3>
                     <p>Price: ${toy.price}</p>
                     <p>Rating: {toy.rating}</p>
-                    
-                      <Link to={`/details/${toy._id}`} >
-                       <button className="bg-orange-600 btn"> View Details</button>
+                    {user ? (
+                      <Link to={`/details/${toy._id}`}>
+                        <button className="bg-orange-600 btn"> View Details</button>
                       </Link>
-                    
+                    ) : (
+                      <p className="font-bold text-red-800">You have to log in first to view details</p>
+                    )}
                   </div>
                 ))}
             </div>

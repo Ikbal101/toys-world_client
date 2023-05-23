@@ -38,17 +38,19 @@
   .banner-overlay button {
     padding: 12px 24px;
     font-size: 18px;
-    background-color: #c5b5b6;
+    background-color: #e09411;
     color: rgb(37, 4, 4);
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    color: #fff;
+    font-weight: bold;
   }
 
 
 
   .shop-btn:hover{
-   background-color: blanchedalmond;
+   background-color: rgb(200, 125, 12);
    color: black;
   }
   
