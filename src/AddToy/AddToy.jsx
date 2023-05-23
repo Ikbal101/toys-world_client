@@ -17,7 +17,7 @@ const AddToy = () => {
   const onSubmit = (data) => {
     // Send the data to the server
     data.subCategory = selectedToys.value;
-    fetch("http://localhost:5000/adding", {
+    fetch("https://toys-world-server-alpha.vercel.app/adding", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),

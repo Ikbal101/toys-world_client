@@ -10,7 +10,7 @@ const ToysTable = () => {
   const {user}=useContext(AuthContext)
 
   useEffect(() => {
-    fetch('http://localhost:5000/toys')
+    fetch('https://toys-world-server-alpha.vercel.app/toys')
       .then(response => response.json())
       .then(toysData => {
         setToys(toysData.slice(0, 20));
@@ -26,7 +26,7 @@ const ToysTable = () => {
 
   const handleShowAll = () => {
     setShowAll(true);
-    fetch('http://localhost:5000/toys')
+    fetch('https://toys-world-server-alpha.vercel.app/toys')
       .then(response => response.json())
       .then(toysData => {
         setToys(toysData);

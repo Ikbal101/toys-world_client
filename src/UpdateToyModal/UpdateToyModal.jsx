@@ -9,7 +9,7 @@ const UpdateToyModal = ({ toy, isOpen, onClose }) => {
 
   const handleToyUpdate = (data) => {
     // Send a PUT request to update the toy on the server
-    fetch(`http://localhost:5000/toys/${toy._id}`, {
+    fetch(`https://toys-world-server-alpha.vercel.app/toys/${toy._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

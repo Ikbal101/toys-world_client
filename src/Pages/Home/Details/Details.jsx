@@ -8,7 +8,7 @@ const Details = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/toys/${id}`)
+    fetch(`https://toys-world-server-alpha.vercel.app/toys/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setToyData(data);

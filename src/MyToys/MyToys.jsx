@@ -14,7 +14,7 @@ const MyToys = () => {
   }, [user]);
 
   const fetchToys = () => {
-    fetch(`http://localhost:5000/myToy/${user?.email}`)
+    fetch(`https://toys-world-server-alpha.vercel.app/myToy/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setToys(data);
@@ -30,7 +30,7 @@ const MyToys = () => {
   };
 
   const handleDeleteToy = (id) => {
-    fetch(`http://localhost:5000/toys/${id}`, {
+    fetch(`https://toys-world-server-alpha.vercel.app/toys/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
